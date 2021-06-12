@@ -35,6 +35,15 @@ Button.-primary {
 
 .form>StackLayout{
   text-align: center;
+  margin: 50% auto auto auto;
+}
+
+#view-container{
+  margin-top: 150px;
+}
+
+#view-container>StackLayout{
+  margin-top :50em;
 }
 
 #appName{

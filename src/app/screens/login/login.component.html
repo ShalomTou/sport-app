@@ -1,6 +1,6 @@
-<ScrollView orientation="vertical" class="page">
+<ScrollView orientation="vertical" class="page" height="3880px">
     <StackLayout class="form" [ngSwitch]="labelPicker">
-        <StackLayout *ngSwitchDefault>
+        <StackLayout *ngSwitchDefault id="view-container">
             <Image src="~/app/assets/exercise.png" class="logo logo-img "></Image>
             <Label class="logo title" [text]='this.appName' id="appName"></Label>
             <!-- LOGIN -->
@@ -10,12 +10,10 @@
                 <!-- Email -->
                 <TextField hint="Email" class="input" keyboardType="email" [(ngModel)]="this.user.email">
                 </TextField>
-                <Label class="logo title" [text]='this.user.email'></Label>
                 <StackLayout class="hr-light"></StackLayout>
                 <!-- Password -->
                 <TextField hint="Password" class="input" secure="true" [(ngModel)]="this.user.password">
                 </TextField>
-                <Label class="logo title" [text]='this.user.password'></Label>
                 <StackLayout class="hr-light"></StackLayout>
                 <!-- Login -->
                 <Button text="Login" class="btn btn-login" (tap)="loginToAccount()"></Button>
@@ -27,10 +25,10 @@
         </StackLayout>
 
         <!-- FORGOT PASS -->
-        <StackLayout *ngSwitchCase="'forgot_password'">
+        <StackLayout *ngSwitchCase="'forgot_password'"  id="view-container">
             <Image src="~/app/assets/exercise.png" class="logo logo-img "></Image>
-            <Label class="logo title" text="LETS PLAY"></Label>
-            <Label text="Forgot Password" textWrap="true" class="sub-title"></Label>
+            <Label class="logo title" [text]='this.appName' id="appName"></Label>
+            <Label text="Forgot Password" textWrap="true" class="sub-title" id="currentLoginScreen"></Label>
             <StackLayout class="form-container">
                 <TextField hint="Email" class="input item-form" keyboardType="email" [(ngModel)]="this.user.email">
                 </TextField>
@@ -41,10 +39,10 @@
         </StackLayout>
 
         <!-- REGISTER -->
-        <StackLayout *ngSwitchCase="'register'">
+        <StackLayout *ngSwitchCase="'register'"  id="view-container">
             <Image src="~/app/assets/exercise.png" class="logo logo-img "></Image>
-            <Label class="logo title" text="LETS PLAY"></Label>
-            <Label text="Register" textWrap="true" class="sub-title-register"></Label>
+            <Label class="logo title" [text]='this.appName' id="appName"></Label>
+            <Label text="Register" textWrap="true" class="sub-title-register" id="currentLoginScreen"></Label>
             <!-- Form Control -->
             <StackLayout class="form-container">
                 <TextField hint="Email" class="input item-form" keyboardType="email" [(ngModel)]="this.user.email">

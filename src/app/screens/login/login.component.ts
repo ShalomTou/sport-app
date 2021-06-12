@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
       .then(() => {
         console.log("Password reset email sent".toUpperCase())
         alert({title: `Password reset email sent`,message: `Check your email.`,okButtonText: "OK"})
+        this.goBackLogin()
       })
       .catch(error => {
         console.log("Error sending password reset email: ".toUpperCase() + error)
@@ -69,6 +70,7 @@ export class LoginComponent implements OnInit {
         const usersCollection = firestore.collection("users");
         usersCollection.doc(this.user.user_uid).set({user: this.user});
         alert({title: `User Created`,message: `Login with your credentials`,okButtonText: "OK"})
+        this.goBackLogin()
       })
       .catch(err => {
         console.log(`An error occured`, err)

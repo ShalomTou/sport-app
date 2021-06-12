@@ -1,0 +1,21 @@
+<FlexboxLayout class="page">
+    <StackLayout class="form">
+        <GridLayout rows="auto" columns="300, 50,15">
+            <TextField hint="Create a new event"  [(ngModel)]="context"  row="0" col="0" style="text-align: center;font-size: 16px;text-transform: capitalize;"></TextField>
+            <Button style="margin:auto;font-size: 32px;"  text="+" row="0" col="1" (tap)="addPost()" ></Button>
+        </GridLayout>
+        <ScrollView height="650">
+            <ListView [items]="feedList"  style="border:black solid 1px;">
+                <ng-template let-item="item" let-odd="odd" let-even="even">
+                    <StackLayout >
+                        <GridLayout style="background-color: #c2c2c2;border-color: black; border-radius: 5rem;" rows="30, *, *" columns="5,*,5" (tap)="expendPost(item)" >
+                            <Label style="text-align: center;font-size: 16px;" [text]="item.context" row="1" col="1" class="feed-context" textWrap="true"></Label>
+                            <Image [src]="item.image" row="3" col="1" class="feed-image"></Image>
+                          </GridLayout>
+                          <!-- <Button text="+" row="4" col="3" ></Button> -->
+                    </StackLayout>
+                </ng-template>
+            </ListView>
+        </ScrollView>
+    </StackLayout>
+</FlexboxLayout>

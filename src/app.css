@@ -53,3 +53,8 @@ Button.-primary {
 #currentLoginScreen{
   font-size: 16px;
 }
+
+#navagation-options>Label{
+  font-size: 16px;
+  text-decoration: underline;
+}

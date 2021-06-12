@@ -3,7 +3,6 @@ import { Component } from '@angular/core'
 import { firebase } from "@nativescript/firebase";
 
 
-
 @Component({
   selector: 'ns-app',
   templateUrl: './app.component.html',

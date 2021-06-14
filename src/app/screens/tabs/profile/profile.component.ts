@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
   public currentUserDoc: {[x: string]: any;distance ? : any;}
   public userEmailAndId: firebase.User
   public genders = [`Male`, `Female`, `Transgender`, `Prefere not to answer`]
-
+  public sports = [{name:`soccer`,selected:false},{name:`basketball`,selected:false},{name:`tennis`,selected:false},{name:`jogging`,selected:false},{name:`street-workout`,selected:false}]
 
   constructor() {}
 

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       })
       .then(result => {
         console.log(JSON.stringify(result))
-        alert({title: `Login Success`,message: result.email,okButtonText: "OK"})
+        // alert({title: `Login Success`,message: result.email,okButtonText: "OK"})
         this.router.navigate(["/tabs"]);
       })
       .catch(error => {

@@ -1,1 +1,28 @@
 /* Add mobile styles for the component here.  */
+/* #MDBottomNavigation{
+    background: blue;
+    color :blue
+}
+#MDTabStrip{
+    background: green;
+    color :green
+}
+#navagation-options{
+    background: red;
+    color :red
+}
+#navagation-options-label{
+    background: yellow;
+    color :yellow;
+    font-size: 24px;
+    text-transform: capitalize;
+
+} */
+
+
+
+
+#navagation-options:active{
+    background: #4b4b4b;
+    color: #f1f1f1;
+}

@@ -1,13 +1,34 @@
 <StackLayout>
     <Label class="sub-title" text="Details"
         style="font-size:32px; margin: 35px auto auto auto;text-align: center;"></Label>
+
     <StackLayout [ngSwitch]="viewToggle">
 
-        <StackLayout *ngSwitchCase="'view1'" class="form" style="text-align: center;" id="views">
+        <StackLayout *ngSwitchDefault class="form" style="text-align: center;" id="views">
+
             <Label text="Email" editable="false" class="label"></Label>
-            <TextField class="details-input no-change-input" keyboardType="email" secure="false"
-                [text]="this.currentUserDoc.email" editable="false"></TextField>
-            <Label text="Password" editable="false" class="label"></Label>
+            <TextField editable ="false"  class="credentials blur" style="font-size: 16px;"  [text]="this.userEmailAndId.email"></TextField>
+
+            <Label text="Full Name" editable="false" class="label" id="fullName"></Label>
+            <TextField [text]="this.currentUserDoc.fullName" editable ="false"  class="credentials blur" style="font-size: 16px;"></TextField>
+
+
+            <Label text="Gender" editable="false" class="label" id="gender"></Label>
+            <TextField [text]="this.currentUserDoc.gender" editable ="false"  class="credentials blur" style="font-size: 16px;"></TextField>
+
+            <Label text="Distance Radius" class="label" id="distance" class="label" id="distance"></Label>
+            <TextField text="{{ this.currentUserDoc.distance + ' Km' }}" class="credentials blur" style="font-size: 16px;" ></TextField>
+
+
+            <Button text="Edit" style="margin: 250px auto auto auto ;" (tap)="toggleView()"></Button>
+
+            <!-- <ListPicker  [items]="genders" class="picker" selectedIndex="0"
+                (selectedIndexChange)="onSelectedIndexChanged($event)">
+                <ng-template let-item="item" let-odd="odd" let-even="even">
+                    <Label [text]="item" class="credentials blur"></Label>
+                </ng-template>
+            </ListPicker> -->
+            <!-- <Label text="Password" editable="false" class="label"></Label>
             <TextField secure="true" class="details-input" [text]="this.currentUserDoc.password" editable="false">
             </TextField>
             <Label text="Birth Date" editable="false" class="label"></Label>
@@ -22,25 +43,40 @@
             <Label text="Last name" editable="false" class="label"></Label>
             <TextField editable="false" secure="false" [text]="this.currentUserDoc.user_last_name"
                 class="details-input"></TextField>
-            <Label text="Gender" editable="false" class="label"></Label>
-            <TextField editable="false" secure="false" class="details-input" [text]="this.currentUserDoc.user_gender">
-            </TextField>
-            <Label text="Username" editable="false" class="label"></Label>
-            <TextField editable="false" secure="false" [text]="this.currentUserDoc.user_username" class="details-input">
-            </TextField>
-            <Label text="{{ this.currentUserDoc.user_distance + ' Km' }}" class="label"></Label>
-            <Slider [value]="this.currentUserDoc.user_distance" minValue="0" maxValue="100" class="p-0 m-0">
-            </Slider>
-            <Button row="0" col="1" text="Edit" style="margin: 5% auto auto auto;"  (tap)="toggleView()"></Button>
+                <Label text="Username" editable="false" class="label"></Label>
+                <TextField editable="false" secure="false" [text]="this.currentUserDoc.user_username" class="details-input">
+                </TextField> -->
+
         </StackLayout>
 
         <StackLayout *ngSwitchCase="'view2'" class="form" style="text-align: center;">
+
             <Label text="Email" editable="false" class="label"></Label>
+            <TextField editable ="false"  class="credentials blur" style="font-size: 16px;"  [text]="this.userEmailAndId.email"></TextField>
+
+            <Label text="Full Name" editable="false" class="label" id="fullName"></Label>
+            <TextField [(ngModel)]="this.currentUserDoc.fullName"  class="credentials" style="font-size: 16px;"></TextField>
+
+            <Label text="Gender" editable="false" class="label" id="gender"></Label>
+            <ListPicker [items]="genders" class="picker" selectedIndex="0"
+                (selectedIndexChange)="onSelectedIndexChanged($event)">
+                <ng-template let-item="item" let-odd="odd" let-even="even">
+                    <Label [text]="item"></Label>
+                </ng-template>
+            </ListPicker>
+
+            <Label text="{{ this.currentUserDoc.distance + ' Km' }}" class="label" id="distance"></Label>
+            <Slider [value]="this.currentUserDoc.distance" minValue="0" maxValue="500" class="p-0 m-0" (valueChange)="onSliderValueChange($event)">
+            </Slider>
+
+            <Button text="Save" style="margin: 250px auto auto auto ;background-color: #c0c0c0;" (tap)="toggleView()"></Button>
+
+            <!-- <Label text="Email" editable="false" class="label"></Label>
             <Label class="details-input" keyboardType="email" [text]="this.currentUserDoc.email"></Label>
             <Label text="Password" editable="false" class="label"></Label>
             <TextField class="details-input w-500" [(ngModel)]="this.currentUserDoc.password"></TextField>
             <Label text="Birth Date" editable="false" class="label"></Label>
-            <Label [text]="this.currentUserDoc.user_birthdate" class="label"></Label>
+            <Label [text]="this.currentUserDoc.user_birthdate" class="label"></Label> -->
             <!-- <DatePicker year="1980" month="4" day="20" [minDate]="minDate" [maxDate]="maxDate"
                 [(ngModel)]="this.currentUserDoc.user_birthdate" (dateChange)="onDateChanged($event)"
                 (dayChange)="onDayChanged($event)" (monthChange)="onMonthChanged($event)"
@@ -49,13 +85,13 @@
             </DatePicker> -->
             <!-- <Button text="BirthDate" class="details-input w-500" style="height: 35"
                 (tap)="changeBirthdatePicker()"></Button> -->
-            <Label text="City" editable="false" class="label"></Label>
+            <!-- <Label text="City" editable="false" class="label"></Label>
             <TextField class="details-input w-500" [(ngModel)]="this.currentUserDoc.user_city"></TextField>
             <Label text="First Name" editable="false" class="label"></Label>
             <TextField class="details-input w-500" [(ngModel)]="this.currentUserDoc.user_first_name"></TextField>
             <Label text="Last name" editable="false" class="label"></Label>
             <TextField [(ngModel)]="this.currentUserDoc.user_last_name" class="details-input w-500"></TextField>
-            <Label text="Gender" editable="false" class="label"></Label>
+            <Label text="Gender" editable="false" class="label"></Label> -->
             <!-- <ListPicker [items]="genders" [(ngModel)]="genders[picker]" class="picker" selectedIndex="0"
                 (selectedIndexChange)="onSelectedIndexChanged($event)"></ListPicker>
             <Label text="Username" editable="false" class="label"></Label>
@@ -65,7 +101,8 @@
             <Label text="{{ this.currentUserDoc.user_distance + ' Km' }}" class="label"></Label>
             <Slider [value]="this.currentUserDoc.user_distance" minValue="0" maxValue="100"
                 (valueChange)="onSliderValueChange($event)" class="p-0 m-0"></Slider> -->
-            <Button text="Save" style="margin: 5% auto auto auto;"  (tap)="toggleView()"></Button>
+            <!-- <Button text="Save" style="bottom: 10% ;margin:auto;" (tap)="toggleView()"></Button> -->
+
         </StackLayout>
 
     </StackLayout>

@@ -16,6 +16,27 @@ The imported CSS rules must precede all other types of rules.
 /* Place any CSS rules you want to apply on both iOS and Android here.
 This is where the vast majority of your CSS code goes. */
 
+
+/* this is the font awsome */
+
+.far {
+  font-family: "Font Awesome 5 Free", "fa-regular-400";
+}
+
+.fab {
+  font-family: "Font Awesome 5 Brands", "fa-brands-400";
+}
+
+.fas {
+  font-family: "Font Awesome 5 Free", "fa-solid-900";
+}
+
+.ico {
+  font-family: "IcoMoon-Free";
+}
+
+/* untill here! */
+
 /*
 The following CSS rule changes the font size of all Buttons that have the
 "-primary" class modifier.
@@ -63,6 +84,27 @@ Button.-primary {
   margin: 500px auto auto auto;
 }
 
-#views{
-  background-color: red !important;
+.credentials.blur{
+  color:#c1c1c1
 }
+
+.picker {
+  background-color:#fcfcfc;
+  border-color: black solid 1px;
+  border-radius: 5rem;
+  width: 800px;
+  height: 250px;
+  vertical-align: middle;
+}
+
+.label{
+  font-size: 12px;
+}
+
+.form>#gender,#distance,#fullName{
+  margin: 150px auto auto auto;
+}
+
+
+
+

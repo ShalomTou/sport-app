@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
     }
     this.feedList.push(newPost)
     this.updateCollection(`posts`, newPost)
+    // clean text input
   }
 
   updateCollection(collection, toPost) {
@@ -77,5 +78,7 @@ export class HomeComponent implements OnInit {
       console.log(err)
     })
   }
+
+  
 
 }

@@ -58,3 +58,11 @@ Button.-primary {
   font-size: 16px;
   text-decoration: underline;
 }
+
+.m-t-5{
+  margin: 500px auto auto auto;
+}
+
+#views{
+  background-color: red !important;
+}

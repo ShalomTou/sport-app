@@ -52,12 +52,7 @@
                 <StackLayout *ngFor="let sport of sports" style="justify-content: center;margin: auto;width: 500px;border: 1px solid black;">
                   <CheckBox  [text]="sport.name" [checked]="sport.selected" [(ngModel)]="sport.selected"></CheckBox>
                 </StackLayout>
-                <!-- [(ngModel)]="sport.selected" (tap)="toggleSelected(sport)" -->
-                <!-- <Button (tap)="test()" text="Select"></Button> -->
-                <!-- <StackLayout *ngFor="let sport of sports" Orientation="Horizontal">
-                    <Label [text]="sport.name"></Label>
-                    <Image src="font://&#xf013;" stretch="none" class="fas" width="35px" height="35px" ></Image>
-                </StackLayout> -->
+       
                 <Label text="{{ this.currentUserDoc.distance + ' Km' }}" class="label" id="distance"></Label>
                 <Slider [value]="this.currentUserDoc.distance" minValue="0" maxValue="500" class="p-0 m-0"
                     (valueChange)="onSliderValueChange($event)">

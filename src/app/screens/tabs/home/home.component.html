@@ -1,31 +1,41 @@
 <FlexboxLayout class="page">
     <StackLayout class="form">
-        <GridLayout rows="auto,auto" columns="250, 50,15" style="background-color: #f1f1f1;vertical-align: middle;">
+        <GridLayout rows="auto,auto,auto" columns="250, auto,75,5"
+            style="background-color: #f1f1f1;vertical-align: middle;">
             <TextField hint="Add Activity" [(ngModel)]="title" row="0" col="0" class="input"
                 style="text-align: start;font-size: 24px;text-transform: capitalize;"></TextField>
-            <TextField hint="Add Location" [(ngModel)]="context" row="1" col="0"
-                style="text-align: center;font-size: 16px;text-transform: capitalize;width:500px" class="input"></TextField>
-            <input hint="Time" [(ngModel)]="context" row="1" col="0" type="time"
-                style="text-align: center;font-size: 16px;text-transform: capitalize;width:500px" class="input">
-            <Button style="margin:auto;font-size: 32px;" text="+" row="0" col="1" (tap)="addPost()"></Button>
+            <TextField hint="Add Location" [(ngModel)]="context" row="1" col="0" width="500px"
+                style="text-align: start;font-size: 16px;text-transform: capitalize;width:500px" class="input">
+            </TextField>
+            <DatePicker  row="2" col="0" [minDate]="minDate" [maxDate]="maxDate"
+                [(ngModel)]="time" (loaded)="onDatePickerLoaded($event)" verticalAlignment="center"
+                [visibility]="birthdatePicker ? 'visible' : 'collapse'">></DatePicker>
+            <Button text="Date" (tap)="birthdatePicker = !birthdatePicker" row="2" col="0"
+                [visibility]="birthdatePicker ? 'collapse' :'visible'"></Button>
+            <Button text="X" style=" transform: skewX(60deg);font-size: 24px;"
+                (tap)="birthdatePicker = !birthdatePicker" row="2" col="2"
+                [visibility]="birthdatePicker ? 'visible' :'collapse'"></Button>
+            <Button style="margin:auto;font-size: 32px;width: 150px;" text="+" row="1" col="2"
+                (tap)="addPost()"></Button>
         </GridLayout>
         <ScrollView height="650" scrollBarIndicatorVisible="false">
             <ListView [items]="feedList" style="border:black solid 1px;">
                 <ng-template let-item="item" let-odd="odd" let-even="even">
                     <StackLayout>
-                        <GridLayout style="background-color: ;border-color: black; border-radius: 5rem;" class="modal"
-                            (tap)="showImage(item)" rows="auto,auto,auto" columns="5,auto,*,auto,5"
+                        <GridLayout style="border-color: black; border-radius: 5rem;" class="modal"
+                            (tap)="showImage(item)" rows="auto,auto,auto" columns="5,auto,auto,auto,5"
                             (tap)="expendPost(item)">
                             <Label style="text-align: center;font-size: 24px;" [text]="item.title" row="0" col="1"
                                 class="feed-context input" textWrap="true"></Label>
-                            <Label style="text-align: center;font-size: 18px;" [text]="item.context" row="0" col="2"
+                            <Label style="text-align: center;font-size: 18px;" [text]="item.context" row="1" col="1"
                                 class="feed-context input" textWrap="true"></Label>
-                            <Label style="text-align: center;font-size: 12px;" [text]="'from:'+item.email" row="1"
-                                col="2" class="feed-context input" textWrap="true"></Label>
+                            <Label style="text-align: center;font-size: 12px;" [text]="item.time" row="0" col="3"
+                                class="feed-context input" textWrap="true"></Label>
+                            <Label style="text-align: center;font-size: 12px;" [text]="'from:'+item.email" row="2"
+                                col="3" class="feed-context input" textWrap="true"></Label>
                             <Image [src]="item.image" row="1" col="2" class="feed-image" width="200px" height="200px">
                             </Image>
                         </GridLayout>
-                        <!-- <Button text="+" row="4" col="3" ></Button> -->
                     </StackLayout>
                 </ng-template>
             </ListView>

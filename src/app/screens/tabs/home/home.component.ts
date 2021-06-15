@@ -22,6 +22,9 @@ import {
   prompt,
   PromptResult,
 } from "tns-core-modules/ui/dialogs";
+import {
+  DatePicker
+} from 'tns-core-modules';
 
 
 @Component({
@@ -35,6 +38,11 @@ export class HomeComponent implements OnInit {
   public context
   public title
   public currentUser
+  public minDate: Date = new Date(1975, 0, 29);
+  public maxDate: Date = new Date(2045, 4, 12);
+  public time
+  public birthdatePicker = false;
+
   constructor(public page: Page, private _modalService: ModalDialogService, private _vcRef: ViewContainerRef) {
     page.actionBarHidden = true;
   }
@@ -54,10 +62,11 @@ export class HomeComponent implements OnInit {
           console.log(doc.id, '=>', data);
           this.feedList.unshift({
             id: +data.id,
-            title:data.title,
+            title: data.title,
             context: data.context,
             email: data.email,
-            image: data.image
+            image: data.image,
+            time: this.timeFormater(data.time)
           })
           this.feedList.sort((a: any, b: any) => b - a)
         });
@@ -67,14 +76,48 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  timeFormater(d) {
+    const year = d.getFullYear() // 2019
+    const date = d.getDate()
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ]
+    const days = [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat'
+    ]
+    const monthName = months[d.getMonth()]
+    const formatted = `${days[d.getDay()]}, ${date} ${months[d.getMonth()]} ${year}`
+    console.log(`=====================`,formatted)
+    return formatted
+
+  }
+
   addPost() {
     console.log(`addPost()`.toUpperCase())
     let newPost = {
       id: this.currentUser.uid,
       image: `https://img-premium.flaticon.com/png/512/3131/premium/3131446.png?token=exp=1623782402~hmac=f77f580d4a00a99eb3f7858c6af31dbf`,
-      title:this.title,
+      title: this.title,
       context: `${this.context}`,
-      email: this.currentUser.email
+      email: this.currentUser.email,
+      time: this.time
     }
     this.feedList.unshift(newPost)
     this.updateCollection(`posts`, newPost)
@@ -88,18 +131,7 @@ export class HomeComponent implements OnInit {
       message: item.context,
       okButtonText: "ok"
     })
-    // alert({
-    //   title: item.title,
-    //   message: item.title,
-    //   okButtonText: "ok"
-    // })
-    // alert({
-    //   title: item.title,
-    //   message: item.context,
-    //   okButtonText: "ok"
-    // })
   }
-
 
   updateCollection(collection, toPost) {
     firestore.collection(collection).add(toPost).then(documentRef => {
@@ -117,6 +149,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  onDatePickerLoaded(args) {
+    this.time = args.object as DatePicker;
+  }
 
 
 }

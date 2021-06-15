@@ -5,6 +5,7 @@ import { NativeScriptMaterialBottomNavigationModule } from "@nativescript-commun
 import {TNSCheckBoxModule} from '@nstudio/nativescript-checkbox/angular'
 
 
+
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 

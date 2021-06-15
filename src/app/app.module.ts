@@ -12,12 +12,13 @@ import { AppComponent } from './app.component'
 import { LoginComponent } from './screens/login/login.component';
 import { HomeComponent } from './screens/tabs/home/home.component';
 import { TabsComponent } from './screens/tabs/tabs.component';
-import { ProfileComponent } from './screens/tabs/profile/profile.component'
+import { ProfileComponent } from './screens/tabs/profile/profile.component';
+import { MapComponent } from './screens/tabs/map/map.component'
 
 @NgModule({
   bootstrap: [AppComponent],
   imports: [TNSCheckBoxModule,NativeScriptModule, AppRoutingModule,NativeScriptFormsModule,NativeScriptHttpClientModule,CommonModule,NativeScriptMaterialBottomNavigationModule,],
-  declarations: [AppComponent, LoginComponent, HomeComponent, TabsComponent, ProfileComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, TabsComponent, ProfileComponent, MapComponent],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA],
 })

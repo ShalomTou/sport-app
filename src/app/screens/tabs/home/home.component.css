@@ -1,1 +1,9 @@
 /* Add mobile styles for the component here.  */
+.modal {
+    background-color: #f7f5f2;
+    box-color:#f7f5f2 ;
+    border-radius: 5px;
+    height:300px;
+    width: 1000px;
+
+}

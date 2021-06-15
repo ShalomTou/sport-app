@@ -78,6 +78,8 @@ export class ProfileComponent implements OnInit {
     this.currentUserDoc.sports = this.sports.filter(o => o.selected === true)
   }
 
+
+
   public onSelectedIndexChanged(args: {object: ListPicker;}) {
     const picker = < ListPicker > args.object;
     this.currentUserDoc.gender = this.genders[picker.selectedIndex]

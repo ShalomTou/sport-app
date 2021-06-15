@@ -1,69 +1,79 @@
-<StackLayout>
-    <Label class="sub-title" text="Details"
-        style="font-size:32px; margin: 35px auto auto auto;text-align: center;"></Label>
+<StackLayout class="page">
+  <StackLayout [ngSwitch]="viewToggle" style="background-color: #f1f1f1;width:90%">
 
-    <StackLayout [ngSwitch]="viewToggle">
+    <ScrollView height="2400px" scrollBarIndicatorVisible="false">
+      <StackLayout *ngSwitchDefault class="form" style="text-align: center;" id="views">
+        <Label text="Email :" editable="false" class="label credentials" ></Label>
+        <TextField editable="false" class="credentials blur " style="font-size: 16px;"
+          [text]="this.userEmailAndId.email"></TextField>
 
-        <ScrollView height="2400px">
-            <StackLayout *ngSwitchDefault class="form" style="text-align: center;" id="views">
-                <Label text="Email" editable="false" class="label"></Label>
-                <TextField editable="false" class="credentials blur" style="font-size: 16px;"
-                    [text]="this.userEmailAndId.email"></TextField>
+        <Label text="Full Name :" editable="false" class="label credentials" id="fullName"></Label>
+        <TextField [text]="this.currentUserDoc.fullName" editable="false" class="credentials blur "
+          style="font-size: 16px;"></TextField>
 
-                <Label text="Full Name" editable="false" class="label" id="fullName"></Label>
-                <TextField [text]="this.currentUserDoc.fullName" editable="false" class="credentials blur"
-                    style="font-size: 16px;"></TextField>
+        <Label text="Gender :" editable="false" class="label credentials" id="gender"></Label>
+        <TextField [text]="this.currentUserDoc.gender" editable="false" class="credentials blur"
+          style="font-size: 16px;"></TextField>
 
+          <Label text="Telephone :" editable="false" class="label credentials" id="gender"></Label>
+        <TextField [text]="this.currentUserDoc.telephone" editable="false" class="credentials blur"
+          style="font-size: 16px;"></TextField>
 
-                <Label text="Gender" editable="false" class="label" id="gender"></Label>
-                <TextField [text]="this.currentUserDoc.gender" editable="false" class="credentials blur"
-                    style="font-size: 16px;"></TextField>
+        <Label text="Age :" editable="false" class="label credentials" id="gender"></Label>
+        <TextField [text]="this.currentUserDoc.age" editable="false" class="credentials blur"
+          style="font-size: 16px;"></TextField>
 
-                <Label text="Sports intrest" editable="false" class="label" id="gender"></Label>
-                <TextField *ngFor="let sport of this.currentUserDoc.sports " [text]="sport.name" editable="false" class="credentials blur"
-                    style="font-size: 16px;"></TextField>
+        <Label text="Sports intrest :" editable="false" class="label credentials" id="gender"></Label>
+        <TextField *ngFor="let sport of this.currentUserDoc.sports " [text]="sport.name" editable="false"
+          class="credentials blur" style="font-size: 16px;"></TextField>
 
-                <Label text="Distance Radius" class="label" id="distance" class="label" id="distance"></Label>
-                <TextField text="{{ this.currentUserDoc.distance + ' Km' }}" class="credentials blur"
-                    style="font-size: 16px;"></TextField>
+        <Label text="Distance Radius :" class="label" id="distance" class="label credentials" id="distance"></Label>
+        <TextField text="{{ this.currentUserDoc.distance + ' Km' }}" class="credentials blur" style="font-size: 16px;">
+        </TextField>
 
+        <Button text="Edit" style="margin: auto;" (tap)="toggleView()"></Button>
+      </StackLayout>
 
-                <Button text="Edit" style="margin: auto;" (tap)="toggleView()"></Button>
-            </StackLayout>
+      <StackLayout *ngSwitchCase="'view2'" class="form" style="text-align: center;">
 
-            <StackLayout *ngSwitchCase="'view2'" class="form" style="text-align: center;">
+        <Label text="Email :" editable="false" class="label credentials"></Label>
+        <TextField editable="false" class="credentials blur" style="font-size: 16px;"
+          [text]="this.userEmailAndId.email"></TextField>
 
-                <Label text="Email" editable="false" class="label"></Label>
-                <TextField editable="false" class="credentials blur" style="font-size: 16px;"
-                    [text]="this.userEmailAndId.email"></TextField>
+        <Label text="Full Name :" editable="false" class="label credentials " id="fullName"></Label>
+        <TextField [(ngModel)]="this.currentUserDoc.fullName" class="credentials" style="font-size: 16px;">
+        </TextField>
 
-                <Label text="Full Name" editable="false" class="label" id="fullName"></Label>
-                <TextField [(ngModel)]="this.currentUserDoc.fullName" class="credentials" style="font-size: 16px;">
-                </TextField>
+        <Label text="Gender :" editable="false" class="label credentials" id="gender"></Label>
+        <ListPicker [items]="genders" class="picker" (selectedIndexChange)="onSelectedIndexChanged($event)">
+          <ng-template let-item="item" let-odd="odd" let-even="even">
+            <Label [text]="item"></Label>
+          </ng-template>
+        </ListPicker>
 
-                <Label text="Gender" editable="false" class="label" id="gender"></Label>
-                <ListPicker [items]="genders" class="picker" (selectedIndexChange)="onSelectedIndexChanged($event)">
-                    <ng-template let-item="item" let-odd="odd" let-even="even">
-                        <Label [text]="item"></Label>
-                    </ng-template>
-                </ListPicker>
+        <Label text="Telephone :" editable="false" class="label credentials" id="gender"></Label>
+        <TextField [(ngModel)]="this.currentUserDoc.telephone"  class="credentials "
+          style="font-size: 16px;"></TextField>
 
-                <Label text="Sports" editable="false" class="label" id="gender"></Label>
-                <StackLayout *ngFor="let sport of sports" style="justify-content: center;margin: auto;width: 500px;border: 1px solid black;">
-                  <CheckBox  [text]="sport.name" [checked]="sport.selected" [(ngModel)]="sport.selected"></CheckBox>
-                </StackLayout>
-       
-                <Label text="{{ this.currentUserDoc.distance + ' Km' }}" class="label" id="distance"></Label>
-                <Slider [value]="this.currentUserDoc.distance" minValue="0" maxValue="500" class="p-0 m-0"
-                    (valueChange)="onSliderValueChange($event)">
-                </Slider>
+        <Label text="Age :" editable="false" class="label credentials" id="gender"></Label>
+        <TextField [text]="this.currentUserDoc.age" class="credentials" style="font-size: 16px;"></TextField>
 
-                <Button text="Save" style="margin: auto ;background-color: #c0c0c0;"
-                    (tap)="toggleView()"></Button>
+        <Label text="Sports :" editable="false" class="label credentials" id="gender"></Label>
+        <StackLayout *ngFor="let sport of sports"
+          style="justify-content: center;margin: auto;width: 500px;border: 1px solid black;">
+          <CheckBox [text]="sport.name" class="credentials" [checked]="sport.selected" [(ngModel)]="sport.selected"></CheckBox>
+        </StackLayout>
 
-            </StackLayout>
+        <Label text="{{ this.currentUserDoc.distance + ' Km' }}" class="label credentials" id="distance"></Label>
+        <Slider [value]="this.currentUserDoc.distance" minValue="0" maxValue="50" class="p-0 m-0"
+          (valueChange)="onSliderValueChange($event)">
+        </Slider>
 
-        </ScrollView>
-    </StackLayout>
+        <Button text="Save" style="margin: auto ;background-color: #c0c0c0;" (tap)="toggleView()"></Button>
+
+      </StackLayout>
+
+    </ScrollView>
+  </StackLayout>
 
 </StackLayout>

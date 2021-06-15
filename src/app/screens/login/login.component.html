@@ -1,8 +1,8 @@
 <ScrollView orientation="vertical" class="page" height="3880px">
     <StackLayout class="form" [ngSwitch]="labelPicker">
         <StackLayout *ngSwitchDefault id="view-container">
-            <Image src="~/app/assets/exercise.png" class="logo logo-img "></Image>
-            <Label class="logo title" [text]='this.appName' id="appName"></Label>
+            <Image src="~/app/assets/exercise.png" class="logo " ></Image>
+            <Label class="title" [text]='this.appName' id="appName"></Label>
             <!-- LOGIN -->
             <Label text="Login" textWrap="true" class="sub-title" id="currentLoginScreen"></Label>
             <!-- Form Control -->
@@ -16,18 +16,18 @@
                 </TextField>
                 <StackLayout class="hr-light"></StackLayout>
                 <!-- Login -->
-                <Button text="Login" class="btn btn-login" (tap)="loginToAccount()"></Button>
+                <Button text="Login" class="btn btn-login input" (tap)="loginToAccount()"></Button>
                 <!-- SignIn -->
-                <Button text="Sign In" class="btn  " (tap)="showRegister()"></Button>
+                <Button text="Sign In" class="btn  input" (tap)="showRegister()"></Button>
                 <!-- Forgot Pass -->
-                <Label text="Forgot Password?" class="forgot_password m-t-30 " (tap)="showForgotPass()"></Label>
+                <Label text="Forgot Password?" class="forgot_password m-t-30" (tap)="showForgotPass()"></Label>
             </StackLayout>
         </StackLayout>
 
         <!-- FORGOT PASS -->
         <StackLayout *ngSwitchCase="'forgot_password'"  id="view-container">
-            <Image src="~/app/assets/exercise.png" class="logo logo-img "></Image>
-            <Label class="logo title" [text]='this.appName' id="appName"></Label>
+            <Image src="~/app/assets/exercise.png" class="logo"></Image>
+            <Label class="title" [text]='this.appName' id="appName"></Label>
             <Label text="Forgot Password" textWrap="true" class="sub-title" id="currentLoginScreen"></Label>
             <StackLayout class="form-container">
                 <TextField hint="Email" class="input item-form" keyboardType="email" [(ngModel)]="this.user.email">
@@ -35,13 +35,13 @@
                 <StackLayout class="hr-light"></StackLayout>
                 <Button text="Send Email" class="btn btn-login m-t-20 " (tap)="forgotPassword()"></Button>
             </StackLayout>
-            <Label text="Back" class="back" (tap)="goBackLogin()"></Label>
+            <Label text="Back" class="back input" (tap)="goBackLogin()"></Label>
         </StackLayout>
 
         <!-- REGISTER -->
         <StackLayout *ngSwitchCase="'register'"  id="view-container">
-            <Image src="~/app/assets/exercise.png" class="logo logo-img "></Image>
-            <Label class="logo title" [text]='this.appName' id="appName"></Label>
+            <Image src="~/app/assets/exercise.png" class="logo "></Image>
+            <Label class="title" [text]='this.appName' id="appName"></Label>
             <Label text="Register" textWrap="true" class="sub-title-register" id="currentLoginScreen"></Label>
             <!-- Form Control -->
             <StackLayout class="form-container">
@@ -70,7 +70,7 @@
                 <StackLayout class="hr-light"></StackLayout>
                 <!-- Buttons -->
                 <Button text="Create Account" class="btn btn-login m-t-20 " (tap)="createUser()"></Button>
-                <Label text="Back" class="back" (tap)="goBackLogin()"></Label>
+                <Label text="Back" class="back input" (tap)="goBackLogin()"></Label>
             </StackLayout>
         </StackLayout>
     </StackLayout>

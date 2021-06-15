@@ -14,6 +14,13 @@ dependencies {
 
 
 android {
+  project.ext {
+    googlePlayServicesVersion = "+"
+  }
+  dependencies {
+    def googlePlayServicesVersion = project.googlePlayServicesVersion
+    compile "com.google.android.gms:play-services-location:$googlePlayServicesVersion"
+  }
   defaultConfig {
     minSdkVersion 17
     generatedDensities = []

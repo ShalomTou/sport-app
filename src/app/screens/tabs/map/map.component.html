@@ -1,0 +1,22 @@
+<StackLayout class="page">
+    <StackLayout height="20%">
+        <Button text="Start" type="button" (tap)="test()"></Button>
+        <ScrollView height="500px" orientation="horizontal" scrollBarIndicatorVisible="false" style="background:#f1f1f1">
+            <StackLayout orientation="horizontal" style="justify-content: space-evenly;" >
+                <Button  *ngFor="let sport of this.currentUserData.sports" class="credentials capitalize"  style="text-align: center;justify-content: center; "  width="300px"
+                height="100"  [text]="sport.name" textWrap="true"></Button>
+            </StackLayout>
+        </ScrollView>
+        <!-- <ScrollView orientation="horizontal" width="1000px" height="1000px">
+        <StackLayout flexDirection="row" orientation="horizontal" alignItems="center" justifyContent="space-between" verticalAlignment="center">
+            <Label *ngFor="let sport of this.currentUserData.sports"  style="background:#f1f1f1;text-align: center;justify-content: center;font-size: 16px; "  width="100%"
+            height="100" class="credentials" [text]="sport.name" ></Label>
+        </StackLayout>
+     </ScrollView> -->
+    </StackLayout>
+    <StackLayout>
+        <GridLayout>
+            <MapView (mapReady)="onMapReady($event)"></MapView>
+        </GridLayout>
+    </StackLayout>
+</StackLayout>

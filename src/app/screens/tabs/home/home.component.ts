@@ -1,9 +1,27 @@
-import {ViewContainerRef} from '@angular/core';
-import {Component,OnInit} from '@angular/core';
-import {ModalDialogService} from '@nativescript/angular';
-import {Page} from "@nativescript/core/ui/page";
-import {firestore,firebase} from "@nativescript/firebase";
-import {FeedInterface} from "../home/feed-interface"
+import {
+  ViewContainerRef
+} from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  ModalDialogService
+} from '@nativescript/angular';
+import {
+  Page
+} from "@nativescript/core/ui/page";
+import {
+  firestore,
+  firebase
+} from "@nativescript/firebase";
+import {
+  FeedInterface
+} from "../home/feed-interface"
+import {
+  prompt,
+  PromptResult,
+} from "tns-core-modules/ui/dialogs";
 
 
 @Component({
@@ -13,15 +31,18 @@ import {FeedInterface} from "../home/feed-interface"
 })
 export class HomeComponent implements OnInit {
 
-  public feedList: Array < FeedInterface > = []
+  public feedList = []
   public context
-
+  public title
+  public currentUser
   constructor(public page: Page, private _modalService: ModalDialogService, private _vcRef: ViewContainerRef) {
     page.actionBarHidden = true;
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.loadFeed()
+    this.currentUser = await firebase.getCurrentUser()
+    console.log(`this.currentUser`, this.currentUser)
   }
 
   loadFeed() {
@@ -31,11 +52,14 @@ export class HomeComponent implements OnInit {
         snapshot.forEach(doc => {
           let data = doc.data()
           console.log(doc.id, '=>', data);
-          this.feedList.push({
-            id: +data.user_id,
-            image: data.imageURL.toString(),
-            context: data.title
+          this.feedList.unshift({
+            id: +data.id,
+            title:data.title,
+            context: data.context,
+            email: data.email,
+            image: data.image
           })
+          this.feedList.sort((a: any, b: any) => b - a)
         });
       })
       .catch(err => {
@@ -43,28 +67,42 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  expendPost(item) {
-    console.log(item)
-  }
-
   addPost() {
     console.log(`addPost()`.toUpperCase())
     let newPost = {
-      id: Math.floor(Math.random() * 10),
-      image: `adasd`,
-      context: `New ${this.context}`
+      id: this.currentUser.uid,
+      image: `https://img-premium.flaticon.com/png/512/3131/premium/3131446.png?token=exp=1623782402~hmac=f77f580d4a00a99eb3f7858c6af31dbf`,
+      title:this.title,
+      context: `${this.context}`,
+      email: this.currentUser.email
     }
-    this.feedList.push(newPost)
+    this.feedList.unshift(newPost)
     this.updateCollection(`posts`, newPost)
-    // clean text input
+    this.context = ''
   }
 
+  showImage(item) {
+    console.log(item)
+    alert({
+      title: item.title,
+      message: item.context,
+      okButtonText: "ok"
+    })
+    // alert({
+    //   title: item.title,
+    //   message: item.title,
+    //   okButtonText: "ok"
+    // })
+    // alert({
+    //   title: item.title,
+    //   message: item.context,
+    //   okButtonText: "ok"
+    // })
+  }
+
+
   updateCollection(collection, toPost) {
-    firestore.collection(collection).add({
-      imageURL: toPost.image,
-      title: toPost.context,
-      user_id: toPost.id
-    }).then(documentRef => {
+    firestore.collection(collection).add(toPost).then(documentRef => {
       alert({
         message: `Post Added`,
         okButtonText: "OK"
@@ -79,6 +117,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  
+
 
 }

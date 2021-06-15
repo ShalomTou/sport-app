@@ -27,8 +27,10 @@ export class LoginComponent implements OnInit {
     firebase.login({
         type: firebase.LoginType.PASSWORD,
         passwordOptions: {
-          email: this.user.email,
-          password: this.user.password
+          email: `123@gmail.com`,
+          password: `123123`
+          // email: this.user.email,
+          // password: this.user.password
         }
       })
       .then(result => {

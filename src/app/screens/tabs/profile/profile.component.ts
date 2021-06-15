@@ -14,6 +14,10 @@ import {
 import {
   User
 } from '../../../services/user.service'
+import {
+  TNSCheckBoxModule
+} from '@nstudio/nativescript-checkbox/angular'
+
 
 @Component({
   selector: 'ns-profile',
@@ -24,10 +28,27 @@ export class ProfileComponent implements OnInit {
 
   public viewToggle: string = "view1"
   x: boolean = false
-  public currentUserDoc: {[x: string]: any;distance ? : any;}
+  public currentUserDoc: {
+    [x: string]: any;distance ? : any;
+  }
   public userEmailAndId: firebase.User
   public genders = [`Male`, `Female`, `Transgender`, `Prefere not to answer`]
-  public sports = [{name:`soccer`,selected:false},{name:`basketball`,selected:false},{name:`tennis`,selected:false},{name:`jogging`,selected:false},{name:`street-workout`,selected:false}]
+  public sports = [{
+    name: `soccer`,
+    selected: false
+  }, {
+    name: `basketball`,
+    selected: false
+  }, {
+    name: `tennis`,
+    selected: false
+  }, {
+    name: `jogging`,
+    selected: false
+  }, {
+    name: `street-workout`,
+    selected: false
+  }]
 
   constructor() {}
 
@@ -44,12 +65,20 @@ export class ProfileComponent implements OnInit {
 
   updateDoc(docId: string, obj) {
     console.log(obj)
-    firestore.collection(`users`).doc(docId).set(obj).then(()=>{
-      alert({title: `Saved`,message: `Saved`,okButtonText: "OK"})
+    firestore.collection(`users`).doc(docId).set(obj).then(() => {
+      alert({
+        title: `Saved`,
+        message: `Saved`,
+        okButtonText: "OK"
+      })
     }).catch(err => console.log(err))
   }
 
-  public onSelectedIndexChanged(args: { object: ListPicker; }) {
+  checkSelectedSports() {
+    this.currentUserDoc.sports = this.sports.filter(o => o.selected === true)
+  }
+
+  public onSelectedIndexChanged(args: {object: ListPicker;}) {
     const picker = < ListPicker > args.object;
     this.currentUserDoc.gender = this.genders[picker.selectedIndex]
   }
@@ -57,6 +86,7 @@ export class ProfileComponent implements OnInit {
   public toggleView() {
     if (this.x) {
       this.viewToggle = 'view1'
+      this.checkSelectedSports()
       this.updateDoc(this.userEmailAndId.uid, this.currentUserDoc)
     } else {
       this.viewToggle = 'view2'
@@ -64,9 +94,12 @@ export class ProfileComponent implements OnInit {
     this.x = !this.x
   }
 
-  public onSliderValueChange(args: { object: Slider; value: any; }) {
+  public onSliderValueChange(args: {
+    object: Slider;value: any;
+  }) {
     let slider = < Slider > args.object;
     this.currentUserDoc.distance = args.value
   }
+
 
 }
